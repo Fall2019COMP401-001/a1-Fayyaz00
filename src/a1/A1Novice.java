@@ -13,7 +13,7 @@ public class A1Novice {
 		
 
 		
-		System.out.println("Print the number of customers");
+		// System.out.println("Print the number of customers");
 		
 		int count = scan.nextInt();
 		
