@@ -2,138 +2,67 @@ package a1;
 
 import java.util.Scanner;
 
+//worked with Tracy Ann and TAs
+
 
 
 public class A1Novice {
 
 	public static void main(String[] args) {
-		
+
+
 		Scanner scan = new Scanner(System.in);
 
-			System.out.println("START HERE");
-			// count for the number of customers
-			
-			int count = scan.nextInt();
+		// Your code follows here.
 
+
+		// START HERE
+		
+		// # of customers and are being handled
+		
+		
+		int numOfCust = scan.nextInt();
+		
+		for (int i = 0; i < numOfCust; i++) {
+			String firstName = scan.next();
+			// gets the first character of the name
+			char firstCharacterOfName = firstName.charAt(0);
+			String lastName = scan.next();
 			
-			//array of said customers
-			Customer[] allCust = new Customer[count];
+			// this is where items are being handled (part of of the first array)
 			
-			for (int i = 0; i < count; i++) {
-				allCust[i] = customerGenerator();
+			int numOfItems = scan.nextInt();
+			double total = 0;
+			
+			for (int j = 0; j < numOfItems; j++) {
+				int quant = scan.nextInt();
 				
-				// generate cart and it's price total
-				Item[] cart = new Item[allCust[i].order];
 				
-				for (int j = 0; j < allCust[i].order; j++) {
-//					allCust[i].cart[j] = itemGenerator();
-					cart[j] = itemGenerator();
-				}
-				allCust[i].cart = cart;
-				double cartTotal = cartPrice(cart);
-				allCust[i].total = cartTotal;
+				String itemNameWhichIsNeverUsedSoThisNameDoesntReallyMatter = scan.next();
+				double costOfSaidItem = scan.nextDouble();
+				total += quant * costOfSaidItem;
 				
 			}
 			
-			for (int q = 0; q < count; q++) {
-				Customer currCust = allCust[q];
-				System.out.println(currCust.fName + ". " + currCust.lName + ": " + currCust.total);
-			}
+			//right at the end of the beginning loop
+			System.out.println(firstCharacterOfName + ". " + lastName + ": " + String.format("%.2f", total));
 			
-			System.out.println("Customer Info: " + allCust[0].fName + allCust[0].fNameFull);
 			
-
-		
-		
-	}
-	
-
-	
-	static Customer customerGenerator() {
-		Scanner scan = new Scanner(System.in);
-		
-
-		String fNameFull = scan.next();
-		String lName = scan.next();
-		int order = scan.nextInt();
-		
-
-		
-		Customer newCust = new Customer(fNameFull, lName, order);
-		
-		
-		return newCust;
-		
-	}
-	
-	static Item itemGenerator() {
-		Scanner scan = new Scanner(System.in);
-		
-		int quantity = scan.nextInt();
-		String name = scan.next();
-		double price = scan.nextDouble();
-		
-		Item newItem = new Item(quantity, name, price);
-		
-		
-		return newItem;
-		
-		
-		
-	}
-	
-	static double cartPrice(Item[] a) {
-		
-		double total = 0.00;
-		for (int i = 0; i < a.length; i++) {
-			total += a[i].total;
-		}
-		
-		return total;
-	
-	}
-	
-public static class Customer {
-		
-		char fName;
-		String fNameFull;
-		String fullName;
-		String lName;
-		int order;
-		double total;
-		Item[] cart;
-		
-		Customer(String a, String b, int c) {
-			this.fNameFull = a;
-			this.fName = a.charAt(0);
-			this.lName = b;
-			this.order = c;
-			this.fullName = a;
-		}
-		
-		
-		
 			
-		
-	}
-	
-	public static class Item {
-		double quant;
-		String name;
-		double cost;
-		double total;
-		
-		Item(double a, String b, double c) {
-			this.quant = a;
-			this.name = b;
-			this.cost = c;
-			this.total = a * c;
 			
 		}
 		
 		
+		
+
+
+
+
+
 	}
-	
-	
-	
+
+
+
+
+
 }

@@ -2,237 +2,117 @@ package a1;
 
 import java.util.Scanner;
 
-import a1.A1Novice.Customer;
-import a1.A1Novice.Item;
-
 public class A1Adept {
+	
+	// worked with Tracy Ann and TAs
 
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
+		int numOfStoreItems = scan.nextInt();
+		
+		// storing items name and price in an array
+		// STORE VAR
+		String[] storeItemName = new String[numOfStoreItems];
+		double[] storeItemPrices = new double[numOfStoreItems];
 		
 		
-		
-
-
-		// Your code follows here.
-		System.out.println("print num of items");
-		int countOfItems = scan.nextInt();
-		ItemAdept[] allItems = new ItemAdept[countOfItems];
-		
-		for (int i = 0; i < countOfItems; i++) {
-			ItemAdept newItem = itemCreatorAdept();
-			allItems[i] = newItem;
+		// this cycles through the store item input and store them to an array
+		for (int i = 0; i < numOfStoreItems; i ++) {
+			
+			storeItemName[i] = scan.next();
+			storeItemPrices[i] = scan.nextDouble();
+			
+			
 		}
 		
-		Customer test = customerGeneratorAdept(allItems);
-		System.out.println("Done");
-		System.out.println(test.total);
+		// customer info begins here
 		
-//		scan.close();
-		int countOfCustomers = scan.nextInt();
-		Customer[] allCustomers;
+		int numOfCust = scan.nextInt();
 		
+		// where the cust info is being stored
+		// CUST VAR
+		String[] custName = new String[numOfCust];
+		double[] custCartPrice = new double[numOfCust];
 		
-		
-	}
-	
-	
-	
-	
-	
-	
-	static Customer customerGenerator() {
-		Scanner scan = new Scanner(System.in);	
-		scan.close();
-		String[] input = new String[3];		
-		input = scan.nextLine().split(" ");
-		String fName = input[0];
-		String lName = input[1];
-		String order = input[2];
-		int cat = Integer.parseInt(order);		
-		Customer aCust = new Customer(fName, lName, cat);	
-		return aCust;		
-		
-	}
-	
-	static Customer customerGeneratorAdept(ItemAdept[] a) {
-		System.out.println("print customer info");
-		Scanner scan = new Scanner(System.in);
-		String[] input = new String[5];
-		input = scan.nextLine().split(" ");
-		scan.close();
-		String fname = input[0];
-		String lName = input[1];
-		String order = input[2];
-		int cat = Integer.parseInt(order);
-		
-		double total = 0;
-		Customer aCust = new Customer(fname, lName, cat);
-		
-		total = cartPriceAdept(input, a);
-		
-		aCust.total = total;
-		
-		scan.close();
-		
-		
-		
-		
-		// CHANGE THIS
-		return aCust;
-	}
-	
-	static double cartPrice(Item[] a) {
-		double total = 0;		
-		for (int i = 0; i < a.length; i++) {
-			total += a[i].total;	
-		}	
-		return total;
-	
-	}
-	
-	static double cartPriceAdept(String[] a, ItemAdept[] b) {
-		String totalItemsString = a[2];
-		int totalItems = Integer.parseInt(totalItemsString);
-		int placeHolderItems = 1;
-		int placeHolderItemsName = 2;
-		double cartTotal = 0; 
-		
-		// CHANGE
-		ItemAdept itemWanted = new ItemAdept("name", 0);
-		
-		
-		for (int i = 0; i < totalItems; i++ ) {
+		// input
+		for (int j = 0; j < numOfCust; j ++) {
+			String currCustName = scan.next() + " " + scan.next();
+			custName[j] = currCustName;
 			
-			// ItemAdept itemWanted;
+			// input for store price will be added directly to cust cart
 			
-			String numOfItemsHolder = a[placeHolderItems = placeHolderItems + 2];
-			int numOfItems = Integer.parseInt(numOfItemsHolder);
+			int sizeOfCart = scan.nextInt();
 			
-			// used for a (item adept)
-			int storeItemNumber;
-			String nameOfItemWanted = a[placeHolderItemsName = placeHolderItemsName + 2];
-			
-			// search for items name
-			for (int j = 0; j < b.length; i++) {
-				if (b[j].name == nameOfItemWanted) {
-					itemWanted = b[j];
+			for (int k = 0; k < sizeOfCart; k ++) {
+				int numOfCurrItem = scan.nextInt();
+				String nameOfCurrItem = scan.next();
+				
+				// used to assign the input to the proper array
+				for (int q = 0; q < numOfStoreItems; q++) {
+					if (nameOfCurrItem.equals(storeItemName[q])) {
+						custCartPrice[j] += (storeItemPrices[q] * numOfCurrItem);
+					}
 				}
+				
 			}
-			// ItemAdept itemWanted;
-			
-			cartTotal += (numOfItems * itemWanted.cost);
 			
 			
+			System.out.println(custName[j] + ": " + custCartPrice[j]);
 			
 			
-			}
-		
-		return cartTotal;
-	}
-	
-	static Item itemCreator() {
-		Scanner scan = new Scanner(System.in);
-		String[] input = new String[3];
-		input = scan.nextLine().split(" ");	
-		String fquant = input[0];
-		double quant = Integer.parseInt(fquant);		
-		String fname = input[1];				
-		String fcost = input[2];
-		double cost = Double.parseDouble(fcost);		
-		Item newItem = new Item(quant, "", cost);		
-		return newItem;		
-	}
-	
-	static ItemAdept itemCreatorAdept() {
-		Scanner scan = new Scanner(System.in);
-		String[] input = new String[2];
-		input = scan.nextLine().split(" ");
-		// only 1 item
-		
-		String name = input[0];				
-		String fcost = input[1];
-		double cost = Double.parseDouble(fcost);		
-	// 	Item newItem = new Item(1, fname, cost);
-		ItemAdept newItem = new ItemAdept(name, cost);
-		
-		return newItem;		
-	}
-	
-	static Customer Biggest(Customer[] a) {
-		Customer biggestD = a[0];		
-		for (int i = 0; i < a.length; i++) {
-			if (a[i].total > biggestD.total) {
-				biggestD = a[i];
-			}
-		}		
-		return biggestD;		
-	}
-	
-	static Customer Smallest(Customer[] a) {
-		Customer smallestD = a[0];		
-		for (int i = 0; i < a.length; i++) {
-			if (a[i].total < smallestD.total) {
-				smallestD = a[i];
-			}
-		}		
-		return smallestD;
-		
-	}
-	
-	static double Average(Customer[] a) {
-		double avg = 0;
-		double total = 0;		
-		for (int i = 0; i < a.length; i++) {
-			total += a[i].total;
 		}
-		avg = total / a.length;	
-		return avg;
-	
-	}
-	
-	
-	
-	
-	
+		
+		/* this portion of the code cycles through each cust cart
+		 * store the price and place 
+		 * then prints
+		 */
+		
+		
+		// Get Biggest
+		double biggestSpender = custCartPrice[0];
+		int biggestSpenderPlace = 0;
+		
+		for (int i = 0; i < numOfCust; i++) {
+			if (custCartPrice[i] >= biggestSpender) {
+				biggestSpender = custCartPrice[i];
+				biggestSpenderPlace = i;
+			}
+		}
+		
+		// Get Smallest
+				double smallestSpender = custCartPrice[0];
+				int smallestSpenderPlace = 0;
+				
+				for (int i = 0; i < numOfCust; i++) {
+					if (custCartPrice[i] <= smallestSpender) {
+						smallestSpender = custCartPrice[i];
+						smallestSpenderPlace = i;
+					}
+				}
+				
+		// Get Average
+				double totalOfAllCarts = 0;
+				double average;
+				
+				for (int i = 0; i < numOfCust; i++) {
+					totalOfAllCarts += custCartPrice[i];
+				}
+				
+				average = totalOfAllCarts / numOfCust;
+				
+				System.out.println("Biggest: " + custName[biggestSpenderPlace] + " (" + String.format("%.2f", biggestSpender) + ") ");
+				
+				System.out.println("Smallest: " + custName[smallestSpenderPlace] + " (" + String.format("%.2f", smallestSpender) + ") ");
+				
+				System.out.println("Average: " + String.format("%.2f", average));
+		
+		
+		
+		
+		
+		
 
-	public static class Customer {
-		char fName;
-		String fullName;
-		String lName;
-		int order;
-		double total;
-		Item[] purchased;
-		Customer(String a, String b, int c) {
-			this.fName = a.charAt(0);
-			this.lName = b;
-			this.order = c;
-			this.fullName = a;
-		}					
-	}	
-	
-	public static class Item {
-		double quant;
-		String name;
-		double cost;
-		double total;		
-		Item(double a, String b, double c) {
-			this.quant = a;
-			this.name = b;
-			this.cost = c;
-			this.total = a * c;	
-		}
 	}
-	
-	public static class ItemAdept {
-		String name;
-		double cost;
-		ItemAdept(String a, double b) {
-			this.name = a;
-			this.cost = b;
-		}
-	}
-	
-	
 }
+
