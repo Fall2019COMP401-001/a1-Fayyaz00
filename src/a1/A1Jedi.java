@@ -75,7 +75,7 @@ int numOfStoreItems = scan.nextInt();
 		// 
 		for (int i = 0; i < numOfStoreItems; i++) {
 			if (numCustPerItem[i] > 0) {
-				System.out.println(numCustPerItem[i] + "customers bought " + numItemsBought[i] + " " + storeItemName[i]);
+				System.out.println(numCustPerItem[i] + " customers bought " + numItemsBought[i] + " " + storeItemName[i]);
 			} else {
 				System.out.println("No customers bought " + storeItemName[i]);
 			}

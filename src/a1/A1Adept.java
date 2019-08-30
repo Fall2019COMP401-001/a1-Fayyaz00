@@ -57,9 +57,7 @@ public class A1Adept {
 				
 			}
 			
-			
-			System.out.println(custName[j] + ": " + custCartPrice[j]);
-			
+	
 			
 		}
 		
