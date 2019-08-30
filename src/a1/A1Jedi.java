@@ -23,6 +23,9 @@ int numOfStoreItems = scan.nextInt();
 		int[] numCustPerItem = new int[numOfStoreItems];
 		int[] numItemsBought = new int[numOfStoreItems];
 		
+		int[] trickster = new int[numOfStoreItems];
+		int[] counter = new int[numOfStoreItems];
+		
 		
 		// this cycles through the store item input and store them to an array
 		for (int i = 0; i < numOfStoreItems; i ++) {
@@ -48,6 +51,7 @@ int numOfStoreItems = scan.nextInt();
 			String currCustName = scan.next() + " " + scan.next();
 			custName[j] = currCustName;
 			
+			
 			// input for store price will be added directly to cust cart
 			
 			int sizeOfCart = scan.nextInt();
@@ -58,17 +62,35 @@ int numOfStoreItems = scan.nextInt();
 				
 				// used to assign the input to the proper array
 				for (int q = 0; q < numOfStoreItems; q++) {
+					
+					
+					
+					
+					
+					
 					if (nameOfCurrItem.equals(storeItemName[q])) {
-						custCartPrice[j] += (storeItemPrices[q] * numOfCurrItem);
+						trickster[q] += 1;
 						
-						numCustPerItem[q] += 1;
-						numItemsBought[q] += numOfCurrItem;
+						if (trickster[q] > 1) {
+							numItemsBought[q] += numOfCurrItem;
+						} else {
+							custCartPrice[j] += (storeItemPrices[q] * numOfCurrItem);
+							
+							numCustPerItem[q] += 1;
+							numItemsBought[q] += numOfCurrItem;
+						}
+						
 					}
+					
 				}
+				
+				
+				
 				
 			}
 			
-
+			int[] trial = new int[numOfStoreItems];
+			trickster = trial;
 			
 		}
 		
